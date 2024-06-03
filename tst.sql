@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Май 10 2024 г., 21:09
+-- Время создания: Июн 02 2024 г., 22:25
 -- Версия сервера: 10.3.22-MariaDB
 -- Версия PHP: 7.1.33
 
@@ -40,7 +40,43 @@ CREATE TABLE `rentors` (
 --
 
 INSERT INTO `rentors` (`id`, `name`, `phone`, `addres`, `uid`) VALUES
-(2, 'Асхат Арманов', '+777878465461', 'Абаева 145/4 25 квартира', 30);
+(5, 'Алмат Асхатович', '87771279904', '1б, 3э, 45к', 30);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `rooms`
+--
+
+CREATE TABLE `rooms` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `price` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `rooms`
+--
+
+INSERT INTO `rooms` (`id`, `title`, `uid`, `price`) VALUES
+(2, '1б, 3э, 45к', 30, 35000),
+(3, '1б, 3э, 40к', 30, 15000);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `tickets`
+--
+
+CREATE TABLE `tickets` (
+  `id` int(11) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `student` varchar(255) NOT NULL,
+  `phone` varchar(50) NOT NULL,
+  `addres` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -104,6 +140,18 @@ ALTER TABLE `rentors`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Индексы таблицы `rooms`
+--
+ALTER TABLE `rooms`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `tickets`
+--
+ALTER TABLE `tickets`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `transactions`
 --
 ALTER TABLE `transactions`
@@ -123,7 +171,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `rentors`
 --
 ALTER TABLE `rentors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT для таблицы `rooms`
+--
+ALTER TABLE `rooms`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT для таблицы `tickets`
+--
+ALTER TABLE `tickets`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `transactions`

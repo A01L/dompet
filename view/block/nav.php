@@ -93,16 +93,24 @@
 						</ul>
 
                     </li>
+
                     <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
 						<i class="flaticon-050-info"></i>
 							<span class="nav-text">Приложение</span>
 						</a>
                         <ul aria-expanded="false">
-                            <li><a href="/profile">Профиль</a></li>
-                            <li><a href="/rentors">Жильцы</a></li>
+                            <li><a href="/rentors">Студенты</a></li>
+							<li><a href="/rooms">Комнаты</a></li>
+							<li><a href="/tickets">Заявки</a></li>
+							<li><a href="/cvitance">Счета</a></li>
                         </ul>
                     </li>
-                    <li><a href="/cvitance" class="ai-icon" aria-expanded="false">
+                    <li><a href="/profile" class="ai-icon" aria-expanded="false">
+							<i class="flaticon-021-command"></i>
+							<span class="nav-text">Профиль</span>
+						</a>
+					</li>
+					<li><a href="/cvitance" class="ai-icon" aria-expanded="false">
 							<i class="flaticon-013-checkmark"></i>
 							<span class="nav-text">Квитанция</span>
 						</a>

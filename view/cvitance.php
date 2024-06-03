@@ -104,7 +104,7 @@ if(isset($_POST['name']) && isset($_POST['phone'])){
 													<div class="col-lg-6 mb-2">
 														<div class="mb-3">
 															<label class="text-label form-label">ФИО*</label>
-															<input type="text" name="name" class="form-control" placeholder="ФИО квартиранта..." required="">
+															<input type="text" name="name" class="form-control" placeholder="ФИО студента..." required="">
 														</div>
 													</div>
 													<div class="col-lg-6 mb-2">

@@ -16,6 +16,9 @@ if($_SESSION['admin']){
     Router::get('/rentors', 'rentors.php');
     Router::get('/depo', 'depo.php');
     Router::get('/transaction', 'transaction.php');
+    Router::get('/rooms', 'rooms.php');
+    Router::get('/tickets', 'tickets.php');
+    Router::get('/schet', 'schet.php');
 }
 
 

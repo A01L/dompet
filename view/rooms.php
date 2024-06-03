@@ -1,15 +1,14 @@
 <?php
-if(isset($_POST['name']) && isset($_POST['phone']) && isset($_POST['addres'])){
-    $data['name'] = $_POST['name'];
-    $data['phone'] = $_POST['phone'];
-    $data['addres'] = $_POST['addres'];
+if(isset($_POST['title']) && isset($_POST['price'])){
+    $data['title'] = $_POST['title'];
     $data['uid'] = $_SESSION['admin']['id'];
-    DBC::insert('rentors', $data);
-    Router::redirect('/rentors');
+    $data['price'] = $_POST['price'];
+    DBC::insert('rooms', $data);
+    Router::redirect('/rooms');
 }
 elseif(isset($_GET['dell'])){
-    DBC::delete('rentors', 'id', $_GET['dell']);
-    Router::redirect('/rentors');
+    DBC::delete('rooms', 'id', $_GET['dell']);
+    Router::redirect('/rooms');
 }
 ?>
 <!DOCTYPE html>
@@ -29,7 +28,7 @@ elseif(isset($_GET['dell'])){
 	<meta name="format-detection" content="telephone=no">
 	
 	<!-- PAGE TITLE HERE -->
-	<title>Dompet : Студенты</title>
+	<title>Dompet : Комнаты</title>
 	
 	<!-- FAVICONS ICON -->
 	<link rel="shortcut icon" type="image/png" href="images/favicon.png" />
@@ -76,7 +75,7 @@ elseif(isset($_GET['dell'])){
 				<div class="row page-titles">
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item active"><a href="javascript:void(0)">Приложение</a></li>
-						<li class="breadcrumb-item"><a href="javascript:void(0)">Студенты</a></li>
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Комнаты</a></li>
 					</ol>
                 </div>
                 <!-- row -->
@@ -84,35 +83,21 @@ elseif(isset($_GET['dell'])){
 					<div class="col-xl-12 col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Добавить студента</h4>
+                                <h4 class="card-title">Добавить Комнату</h4>
                             </div>
                             <div class="card-body">
                                 <div class="basic-form">
-                                    <form action="/rentors" method="post">
+                                    <form action="/rooms" method="post">
 
                                         <div class="row">
                                             <div class="mb-3 col-md-6">
-                                                <label class="form-label">ФИО</label>
-                                                <input type="text" name="name" class="form-control" placeholder="ФИО студента...">
+                                                <label class="form-label">Наименование</label>
+                                                <input type="text" name="title" class="form-control" placeholder="Корпус, этаж, комната...">
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label class="form-label">Телефон</label>
-                                                <input type="text" name="phone" class="form-control" placeholder="Пример: +77070707700" >
+                                                <label class="form-label">Наценка (за месяц)</label>
+                                                <input type="text" name="price" class="form-control" placeholder="Пример: 20000" >
                                             </div>
-                                            <div class="mb-3 col-md-12">
-												<label class="form-label">Комната</label>
-												<select name="addres" class="default-select form-control wide">
-													<?php
-													$rentors = DBC::select('rooms', 'uid', $_SESSION['admin']['id'],1);
-													foreach($rentors as $row){
-														?>
-															<option value="<?=$row['title']?>"><?=$row['title']?></option>
-														<?php
-													}
-													?>
-												</select>
-											</div>
-                                            
                                         </div>
                                         <button class="btn btn-primary">Добавить в базу</button>
                                     </form>
@@ -126,7 +111,7 @@ elseif(isset($_GET['dell'])){
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Список студентов</h4>
+                                <h4 class="card-title">Список комнат</h4>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -134,20 +119,20 @@ elseif(isset($_GET['dell'])){
                                         <thead>
                                             <tr>
                                                 <th style="width:80px;"><strong>#</strong></th>
-                                                <th><strong>Студент</strong></th>
                                                 <th><strong>Объект</strong></th>
+                                                <th><strong>Наценка</strong></th>
                                                 <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
-                                            $rentors = DBC::select('rentors', 'uid', $_SESSION['admin']['id'],1);
+                                            $rentors = DBC::select('rooms', 'uid', $_SESSION['admin']['id'],1);
                                             foreach($rentors as $row){
                                                 ?>
                                                     <tr>
                                                         <td><strong><?=$row['id']?></strong></td>
-                                                        <td><?=$row['name']?></td>
-                                                        <td><?=$row['addres']?></td>
+                                                        <td><?=$row['title']?></td>
+                                                        <td><?=$row['price']?>/м</td>
                                                         
                                                         <td>
                                                             <div class="dropdown">
@@ -155,8 +140,6 @@ elseif(isset($_GET['dell'])){
                                                                     <svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"/><circle fill="#000000" cx="5" cy="12" r="2"/><circle fill="#000000" cx="12" cy="12" r="2"/><circle fill="#000000" cx="19" cy="12" r="2"/></g></svg>
                                                                 </button>
                                                                 <div class="dropdown-menu">
-                                                                    <a class="dropdown-item" href="tel:<?=$row['phone']?>">Набрать номер</a>
-                                                                    <a class="dropdown-item" href="<?=Gen::wame($row['phone'])?>">Написать по Whatsapp</a>
                                                                     <a class="dropdown-item" href="?dell=<?=$row['id']?>">Удалить из базы</a>
                                                                 </div>
                                                             </div>
